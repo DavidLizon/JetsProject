@@ -1,0 +1,8 @@
+HotAirBaloon,nimus,100.2,75,100_000
+Cargo,Chunker,250,700,200_000
+Cargo,Boeing 737,200,750,250_000
+Passenger,Boeing Max,7,1,300_000
+
+
+
+model, speed, range, and price 

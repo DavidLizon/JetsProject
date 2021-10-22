@@ -4,7 +4,7 @@
 
 This programs....
 
-# Techonologies Used
+# Technologies Used
 
 
 # What I learned
