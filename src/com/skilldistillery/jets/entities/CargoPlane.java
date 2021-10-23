@@ -9,8 +9,6 @@ public class CargoPlane extends Jet implements CargoCarrier{
 	
 	public void loadCargo() {
 		System.out.println("LOADING CARGO!!!!!!");
-
-		
 	}
 	
 

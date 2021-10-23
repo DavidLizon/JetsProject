@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class AirField {
@@ -17,7 +16,6 @@ public class AirField {
 		try (BufferedReader bufIn = new BufferedReader(new FileReader(fileName))) {
 			String line;
 			while ((line = bufIn.readLine()) != null) {
-//				System.out.println(line);
 				String[] jetInfo = line.split(",");
 				String type = jetInfo[0];
 				String model = jetInfo[1];
@@ -38,46 +36,65 @@ public class AirField {
 		}
 	}
 
+	// Accessible from JetsApplication to generate planes from file
 	public void getField() {
 		readFromFile();
 	}
 
 	public void displayJets() {
-		// REMOVE BEFORE SUMITTING ======================================================================================================================
-		System.out.println(jets.size());
+//		int i = 1;
+//		Iterator<Jet> it = jets.iterator();
+//		while (it.hasNext()) {
+//			System.out.print(i + ": ");
+//			System.out.println(it.next());
+//			i++;
+//	}
 
-		Iterator<Jet> it = jets.iterator();
-		while (it.hasNext()) {
-			System.out.println(it.next());
+		System.out.println();
+		for (int i = 0; i < jets.size(); i++) {
+			System.out.println((i + 1) + ": " + jets.get(i));
 		}
+		System.out.println();
+
 	}
 
 	public void setJet(String type, String model, int speed, int range, double price) {
-		BasicPlane basicPlane = new BasicPlane(type, model, speed, range, price);
-		basicPlane.getNewPlane();
-//		Jet newJet = new CargoPlane("Cargo", "To-Mater", 150, 300, 100000);
+		Jet basicPlane = new BasicPlane(type, model, speed, range, price);
+		((BasicPlane) basicPlane).getNewPlane();
 		jets.add(basicPlane);
 	}
 
-	public void removeJet() {
-		Jet newJet = new CargoPlane("Cargo", "To-Mater", 150, 300, 100000);
-		jets.remove(5);
+	public void removeJet(int number) {
+		jets.remove(number);
 	}
+
+	public void findFastestJet() {
+		Jet fastest = jets.get(0);
+		int fast = jets.get(0).getSpeed();
+		int arrSize = jets.size();
+
+		for (int i = 0; i < jets.size(); i++) {
+			int arrInFor = jets.size();
+			if (fast < jets.get(i).getSpeed()) {
+				fast = jets.get(i).getSpeed();
+				fastest = jets.get(i);
+			}
+		}
+		System.out.println("\nThe fastest jet is:\n" + fastest + "\n");
+	}
+
+	public void findLongestRange() {
+		Jet longestRange = jets.get(0);
+		int range = jets.get(0).getRange();
+
+		for (int i = 0; i < jets.size(); i++) {
+			if (range < jets.get(i).getRange()) {
+				longestRange = jets.get(i);
+			}
+		}
+
+		System.out.println("\nThe jet with the longest range is: " + longestRange + "\n");
+
+	}
+
 }
-
-
-////	 DELETE USED FOR TESTING
-//	public static void main(String[] args) {
-//		AirField af = new AirField();
-//
-//		af.readFromFile();
-//		af.displayJets();
-//
-//		af.addJet();
-//		af.displayJets();
-//		
-//		af.removeJet();
-//		af.displayJets();
-//		
-//
-//	}
