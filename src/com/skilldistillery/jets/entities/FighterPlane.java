@@ -1,5 +1,13 @@
 package com.skilldistillery.jets.entities;
 
-public class FighterPlane {
+public class FighterPlane extends Jet {
 
+	public FighterPlane(String type, String model, int speed, int range, double price) {
+		super(type, model, speed, range, price);
+	}
+	
+public void fight() {
+		
+	}
+	
 }
