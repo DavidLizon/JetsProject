@@ -1,5 +1,6 @@
 package com.skilldistillery.jets.entities;
 
-public class CargoCarrier {
+interface CargoCarrier {
 
+	public void loadCargo();
 }

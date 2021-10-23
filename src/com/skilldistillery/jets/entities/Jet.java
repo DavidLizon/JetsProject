@@ -16,7 +16,12 @@ public abstract class Jet {
 		this.price = price;
 	}
 
+	// Prints out the jet details and the amount of time the jet can fly until it
+	// runs out of fuel (based on speed and range).
 	public void fly() {
+		double timeAbleToFly;
+		timeAbleToFly = range / speed;
+		System.out.println(toString() + timeAbleToFly );
 	}
 
 	public double getSpeedInMach(int speed) {
@@ -29,13 +34,22 @@ public abstract class Jet {
 
 	@Override
 	public String toString() {
-		if (type.equals("Cargo")) {
-			return "Jet Type: " + type + "\t\tModel: " + model + "\t\tSpeed: " + speed + "\tRange: " + range + "\tPrice: "
-					+ price;
-		} else {
-			return "Jet Type: " + type + "\tModel: " + model + "\tSpeed: " + speed + "\tRange: " + range + "\tPrice: "
-					+ price;
-		}
+		return "Jet Type: " + type + "\tModel: " + model + "\tSpeed: " + speed + "\tRange: " + range + "\tPrice: "
+		+ price;
 	}
+
+	
+	
+//// prints out formatted output
+//	@Override
+//	public String toString() {
+//		if (type.equals("Cargo")) {
+//			return "Jet Type: " + type + "\t\tModel: " + model + "\t\tSpeed: " + speed + "\tRange: " + range
+//					+ "\tPrice: " + price;
+//		} else {
+//			return "Jet Type: " + type + "\tModel: " + model + "\tSpeed: " + speed + "\tRange: " + range + "\tPrice: "
+//					+ price;
+//		}
+//	}
 
 }

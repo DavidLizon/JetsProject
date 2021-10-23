@@ -43,6 +43,7 @@ public class AirField {
 	}
 
 	public void displayJets() {
+		// REMOVE BEFORE SUMITTING ======================================================================================================================
 		System.out.println(jets.size());
 
 		Iterator<Jet> it = jets.iterator();
@@ -51,9 +52,11 @@ public class AirField {
 		}
 	}
 
-	public void setJet() {
-		Jet newJet = new CargoPlane("Cargo", "To-Mater", 150, 300, 100000);
-		jets.add(newJet);
+	public void setJet(String type, String model, int speed, int range, double price) {
+		BasicPlane basicPlane = new BasicPlane(type, model, speed, range, price);
+		basicPlane.getNewPlane();
+//		Jet newJet = new CargoPlane("Cargo", "To-Mater", 150, 300, 100000);
+		jets.add(basicPlane);
 	}
 
 	public void removeJet() {
