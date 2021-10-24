@@ -1,5 +1,7 @@
 package com.skilldistillery.jets.app;
 
+import java.io.IOException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import com.skilldistillery.jets.entities.AirField;
@@ -97,25 +99,71 @@ public class JetsApplication {
 	}
 
 	private void userAddJet(AirField field) {
+		int speed = 0;
+		int range = 0;
+		long price = 0;
+
+
 		System.out.println("\nThanks for adding a jet to the airfield!\n");
 		System.out.print("What type of plane are you adding? (Cargo, Fighter, or Default) ");
 		String type = kb.nextLine();
 		System.out.print("What model of plane are you adding? ");
 		String model = kb.nextLine();
 		System.out.print("What is the top speed? ");
-		int speed = kb.nextInt();
-		kb.nextLine();
-		System.out.print("What is the max range? ");
-		int range = kb.nextInt();
-		kb.nextLine();
+
+		errorCatchAddJet(speed);
+		
+		errorCatchAddJet(range);
+//		errorCatchAddJet(price);
+		
+//		while (!gotValidInput) {
+//			try {
+//				speed = kb.nextInt();
+//				kb.nextLine();
+//				if (speed > 0) {
+//					gotValidInput = true;
+//				}else {
+//					System.out.print("Please enter a whole number above 0. ");
+//				}
+//			} catch (InputMismatchException e) {
+//				System.out.print("Please enter a whole number above 0. ");
+//				kb.nextLine();
+//			}
+//		}
+
+//		System.out.print("What is the max range? ");
+//		 range = kb.nextInt();
+//		kb.nextLine();
+
 		System.out.print("What is the cost? ");
-		int price = kb.nextInt();
+		 price = kb.nextLong();
 		kb.nextLine();
 
 		field.setJet(type, model, speed, range, price);
 
 		System.out.println();
 		field.displayJets();
+	}
+	
+	public void errorCatchAddJet(int attribute) {
+		boolean gotValidInput = false;
+		
+		while (!gotValidInput) {
+			try {
+				System.out.println("waiting for int");
+				attribute = kb.nextInt();
+//				kb.nextLine();
+				if (attribute > 0) {
+					gotValidInput = true;
+				}else {
+					System.out.print("Please enter a whole number above 0. ");
+				}
+			} catch (InputMismatchException e) {
+				System.out.print("CATCH Please enter a whole number above 0. ");
+//				kb.nextInt();
+				kb.nextLine();
+			}
+		}
 	}
 
 	private void displayUserMenu() {
