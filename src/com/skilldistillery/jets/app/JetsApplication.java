@@ -69,8 +69,7 @@ public class JetsApplication {
 			System.out.println("FIRE THE MISS-ILES!!!!\n");
 			System.out.println("But I'm le tired..");
 			System.out.println(".....");
-			System.out.println("Well, take a nap and then");
-			System.out.println("FIRE THE MISS-ILES!!!!\n");
+			System.out.println("Well, take a nap and then FIRE THE MISS-ILES!!!!\n");
 			break;
 		case 7: // add a jet to fleet
 			userAddJet(field);
@@ -102,7 +101,7 @@ public class JetsApplication {
 		int speed = 0;
 		int range = 0;
 		long price = 0;
-
+		boolean ValidInput = false;
 
 		System.out.println("\nThanks for adding a jet to the airfield!\n");
 		System.out.print("What type of plane are you adding? (Cargo, Fighter, or Default) ");
@@ -111,59 +110,57 @@ public class JetsApplication {
 		String model = kb.nextLine();
 		System.out.print("What is the top speed? ");
 
-		errorCatchAddJet(speed);
-		
-		errorCatchAddJet(range);
-//		errorCatchAddJet(price);
-		
-//		while (!gotValidInput) {
-//			try {
-//				speed = kb.nextInt();
-//				kb.nextLine();
-//				if (speed > 0) {
-//					gotValidInput = true;
-//				}else {
-//					System.out.print("Please enter a whole number above 0. ");
-//				}
-//			} catch (InputMismatchException e) {
-//				System.out.print("Please enter a whole number above 0. ");
-//				kb.nextLine();
-//			}
-//		}
+		speed = errorCatchAddJet(speed);
 
-//		System.out.print("What is the max range? ");
-//		 range = kb.nextInt();
-//		kb.nextLine();
+		System.out.print("What is the range? ");
+		range = errorCatchAddJet(range);
 
 		System.out.print("What is the cost? ");
-		 price = kb.nextLong();
-		kb.nextLine();
+		while (!ValidInput) {
+			try {
+				price = kb.nextLong();
+				kb.nextLine();
+				if (price >= 0) {
+					ValidInput = true;
+					break;
+				} else {
+					System.out.print("Please enter a whole number equal to or above 0. ");
+				}
+			} catch (InputMismatchException e) {
+				System.out.print("Please enter a whole number equal to or above 0. ");
+				kb.nextLine();
+			}
+		}
+
+//		System.out.print("What is the cost? ");
+//		price = kb.nextLong();
+//		kb.nextLine();
 
 		field.setJet(type, model, speed, range, price);
 
 		System.out.println();
 		field.displayJets();
 	}
-	
-	public void errorCatchAddJet(int attribute) {
+
+	public int errorCatchAddJet(int attribute) {
 		boolean gotValidInput = false;
-		
+
 		while (!gotValidInput) {
 			try {
-				System.out.println("waiting for int");
 				attribute = kb.nextInt();
-//				kb.nextLine();
 				if (attribute > 0) {
 					gotValidInput = true;
-				}else {
+					kb.nextLine();
+					break;
+				} else {
 					System.out.print("Please enter a whole number above 0. ");
 				}
 			} catch (InputMismatchException e) {
-				System.out.print("CATCH Please enter a whole number above 0. ");
-//				kb.nextInt();
+				System.out.print("Please enter a whole number above 0. ");
 				kb.nextLine();
 			}
 		}
+		return attribute;
 	}
 
 	private void displayUserMenu() {

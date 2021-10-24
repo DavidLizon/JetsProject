@@ -63,7 +63,7 @@ public class AirField {
 			Jet newCargoPlane = new CargoPlane(type, model, speed, range, price);
 			jets.add(newCargoPlane);
 		} else if (type.toLowerCase().equals("fighter")) {
-			Jet newFighterPlane = new CargoPlane(type, model, speed, range, price);
+			Jet newFighterPlane = new FighterPlane(type, model, speed, range, price);
 			jets.add(newFighterPlane);
 		} else {
 			Jet basicPlane = new BasicPlane(type, model, speed, range, price);
