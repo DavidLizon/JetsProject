@@ -2,7 +2,7 @@ package com.skilldistillery.jets.entities;
 
 public class BasicPlane extends Jet	{
 
-	public BasicPlane(String type, String model, int speed, int range, double price) {
+	public BasicPlane(String type, String model, int speed, int range, long price) {
 		super(type, model, speed, range, price);
 	}
 

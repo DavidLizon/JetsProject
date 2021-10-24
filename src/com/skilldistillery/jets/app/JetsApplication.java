@@ -51,6 +51,7 @@ public class JetsApplication {
 			field.displayJets();
 			break;
 		case 2: // fly all jets
+			field.flyAllJets();
 			break;
 		case 3: // view fastest jet
 			field.findFastestJet();
@@ -59,8 +60,15 @@ public class JetsApplication {
 			field.findLongestRange();
 			break;
 		case 5: // load all cargo jets
+			field.loadCargoJets();
 			break;
 		case 6: // dog fight!
+			field.sendTheFighters();
+			System.out.println("FIRE THE MISS-ILES!!!!\n");
+			System.out.println("But I'm le tired..");
+			System.out.println(".....");
+			System.out.println("Well, take a nap and then");
+			System.out.println("FIRE THE MISS-ILES!!!!\n");
 			break;
 		case 7: // add a jet to fleet
 			userAddJet(field);
@@ -72,31 +80,24 @@ public class JetsApplication {
 			continueProgram = false;
 			break;
 		default:
-
+			System.out.println("That was not an option. Please choose a number from the options provided.");
 		}
 
 		return continueProgram;
 	}
-	
-	private void flyAllJets(AirField field) {
-		
 
-		
-		
-	}
-	
 	private void userRemoveJet(AirField field) {
 		field.displayJets();
-		System.out.print("Which jet would you like to remove? ");
+		System.out.print("Enter the number of the jet you like to remove: ");
 		int numToRemove = kb.nextInt() - 1;
-		kb.nextLine();	// clears return char
-		System.out.println("Jet removed.");
+		kb.nextLine(); // clears return char
+		System.out.println("Jet turned into a paperwieght.");
 		field.removeJet(numToRemove);
 		field.displayJets();
 	}
 
 	private void userAddJet(AirField field) {
-		System.out.println("Thanks for adding a jet to the airfield!");
+		System.out.println("\nThanks for adding a jet to the airfield!\n");
 		System.out.print("What type of plane are you adding? (Cargo, Fighter, or Default) ");
 		String type = kb.nextLine();
 		System.out.print("What model of plane are you adding? ");
@@ -113,8 +114,9 @@ public class JetsApplication {
 
 		field.setJet(type, model, speed, range, price);
 
+		System.out.println();
+		field.displayJets();
 	}
-	
 
 	private void displayUserMenu() {
 		System.out.println("1: List fleet\n" + "2: Fly all jets\n" + "3: View fastest jet\n"

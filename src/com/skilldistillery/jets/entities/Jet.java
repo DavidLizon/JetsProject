@@ -6,9 +6,9 @@ public abstract class Jet {
 	private String model;
 	private int speed;
 	private int range;
-	private double price;
+	private long price;
 
-	public Jet(String type, String model, int speed, int range, double price) {
+	public Jet(String type, String model, int speed, int range, long price) {
 		this.type = type;
 		this.model = model;
 		this.speed = speed;
@@ -20,8 +20,8 @@ public abstract class Jet {
 	// runs out of fuel (based on speed and range).
 	public void fly() {
 		double timeAbleToFly;
-		timeAbleToFly = range / speed;
-		System.out.println(toString() + timeAbleToFly );
+		timeAbleToFly = (double) this.range / this.speed;
+		System.out.println("\tFlight time: "+ String.format("%.2f",timeAbleToFly) + " hours at max speed.");
 	}
 
 	public double getSpeedInMach(int speed) {
@@ -68,18 +68,30 @@ public abstract class Jet {
 		return price;
 	}
 
-	public void setPrice(double price) {
+	public void setPrice(long price) {
 		this.price = price;
+	}
+
+	
+	public String getJetInfo() {
+		return "Type: " + type + "\tModel: " + model + "\tSpeed: " + speed + "\tRange: " + range + "\tPrice: "
+				+ price;
 	}
 
 	@Override
 	public String toString() {
-		return "Jet Type: " + type + "\tModel: " + model + "\tSpeed: " + speed + "\tRange: " + range + "\tPrice: "
-		+ price;
+		return "Jet [type=" + type + ", model=" + model + ", speed=" + speed + ", range=" + range + ", price=" + price
+				+ "]";
 	}
+	
+	
+	
+//	@Override
+//	public String toString() {
+//		return "Type: " + type + "\tModel: " + model + "\tSpeed: " + speed + "\tRange: " + range + "\tPrice: "
+//		+ price;
+//	}
 
-	
-	
 //// prints out formatted output
 //	@Override
 //	public String toString() {
