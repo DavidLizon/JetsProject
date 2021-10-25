@@ -1,5 +1,5 @@
-Cargo,Chunker,350,3500,14000
+Tanker,Chunker,350,3500,14000
 Cargo,Bessie,600,7000,127500
 Fighter,Leroy Jenkins,1550,1400,80000
-Fighter,Death Knight,1600,1800,38000
-Fighter,Dudley 22,1100,700,135000
+Commercial,Death Knight,1600,1800,38000
+Leisure,Dudley 22,1100,700,135000

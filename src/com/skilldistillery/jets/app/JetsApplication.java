@@ -1,9 +1,7 @@
 package com.skilldistillery.jets.app;
 
-import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
-
 import com.skilldistillery.jets.entities.AirField;
 
 public class JetsApplication {
@@ -21,26 +19,46 @@ public class JetsApplication {
 
 		AirField field = new AirField();
 		// Generates AirField and loads with aircraft from file.
+		
+		System.out.println("Talk to me mother goose.\n");
 		field.getField();
-//		field.readFromFile();
 
 		userInteraction(field);
 
-//		field.removeJet();
-//		field.displayJets();
-		System.out.println("PROGRAM ENDED!!!!");
+		System.out.println("\nYou broke my will, but what a thrill\n"
+				+ "Goodness gracious, great balls of fire\nda na na na nah");
 		cleanUp();
 	}
 
 	private void userInteraction(AirField field) {
 		boolean continueProgram = true;
-		int userChoice;
+		int userChoice = 0;
 
 		do {
 			displayUserMenu();
-			System.out.print("Which option would you like to select? ");
-			userChoice = kb.nextInt();
-			kb.nextLine(); // Clear return char
+			System.out.print("What option would youlike to select? ");
+			
+			boolean gotValidInput = false;
+			while (!gotValidInput) {
+				try {
+					userChoice = kb.nextInt();
+					if (userChoice > 0 || userChoice < 10) {
+						gotValidInput = true;
+						kb.nextLine();
+						break;
+					} else {
+						System.out.println("\nThat input was incorrect. Please enter a number form the list:\n");
+					}
+				} catch (InputMismatchException e) {
+					System.out.println("\nThat input was incorrect. Please enter a number form the list:\n");
+					displayUserMenu();
+					kb.nextLine();
+				}
+				
+			}
+			
+//			= kb.nextInt();
+//			kb.nextLine(); // Clear return char
 			continueProgram = switchStatement(userChoice, field, continueProgram);
 
 		} while (continueProgram == true);
@@ -51,27 +69,34 @@ public class JetsApplication {
 		switch (userChoice) {
 		case 1: // list fleet
 			field.displayJets();
+			System.out.println("Nice lookin' fleet ya' have there.");
+			System.out.println();
 			break;
 		case 2: // fly all jets
+			System.out.println("\nSorry Goose, but it's time to buzz the Tower.");
 			field.flyAllJets();
 			break;
 		case 3: // view fastest jet
+			System.out.println("\nI feel the need… The need for speed!!!");
 			field.findFastestJet();
 			break;
 		case 4: // view jet with longest range
 			field.findLongestRange();
+			System.out.println("You can be my wingman any time\n");
 			break;
 		case 5: // load all cargo jets
+			System.out.println("\nLooks like we're flying a load out of Hong Kong");
 			field.loadCargoJets();
 			break;
 		case 6: // dog fight!
 			field.sendTheFighters();
-			System.out.println("FIRE THE MISS-ILES!!!!\n");
+			System.out.println("FIRE THE MISS-ILES!!!!");
 			System.out.println("But I'm le tired..");
 			System.out.println(".....");
 			System.out.println("Well, take a nap and then FIRE THE MISS-ILES!!!!\n");
 			break;
 		case 7: // add a jet to fleet
+			System.out.println("\nWe're writing checks our body can't cash...");
 			userAddJet(field);
 			break;
 		case 8: // remove a jet from fleet
@@ -92,7 +117,7 @@ public class JetsApplication {
 		System.out.print("Enter the number of the jet you like to remove: ");
 		int numToRemove = kb.nextInt() - 1;
 		kb.nextLine(); // clears return char
-		System.out.println("Jet turned into a paperwieght.");
+		System.out.println("\nSad to see that one get turned into a paperwieght...");
 		field.removeJet(numToRemove);
 		field.displayJets();
 	}
@@ -103,19 +128,19 @@ public class JetsApplication {
 		long price = 0;
 		boolean ValidInput = false;
 
-		System.out.println("\nThanks for adding a jet to the airfield!\n");
-		System.out.print("What type of plane are you adding? (Cargo, Fighter, or Default) ");
+		System.out.print("\nWhat type of jet are we adding? (Cargo, Fighter, Default, or a Custom jet?)" +
+				"\nIf custom, enter the type: ");
 		String type = kb.nextLine();
-		System.out.print("What model of plane are you adding? ");
+		System.out.print("What model is it? ");
 		String model = kb.nextLine();
-		System.out.print("What is the top speed? ");
+		System.out.print("How about the top speed? ");
 
-		speed = errorCatchAddJet(speed);
+		speed = errorCatchIntExpectedJet(speed);
 
-		System.out.print("What is the range? ");
-		range = errorCatchAddJet(range);
+		System.out.print("The range? ");
+		range = errorCatchIntExpectedJet(range);
 
-		System.out.print("What is the cost? ");
+		System.out.print("And the cost? ");
 		while (!ValidInput) {
 			try {
 				price = kb.nextLong();
@@ -124,17 +149,13 @@ public class JetsApplication {
 					ValidInput = true;
 					break;
 				} else {
-					System.out.print("Please enter a whole number equal to or above 0. ");
+					System.out.print("Enter a whole number equal to or above 0. ");
 				}
 			} catch (InputMismatchException e) {
-				System.out.print("Please enter a whole number equal to or above 0. ");
+				System.out.print("Enter a whole number equal to or above 0. ");
 				kb.nextLine();
 			}
 		}
-
-//		System.out.print("What is the cost? ");
-//		price = kb.nextLong();
-//		kb.nextLine();
 
 		field.setJet(type, model, speed, range, price);
 
@@ -142,7 +163,7 @@ public class JetsApplication {
 		field.displayJets();
 	}
 
-	public int errorCatchAddJet(int attribute) {
+	public int errorCatchIntExpectedJet(int attribute) {
 		boolean gotValidInput = false;
 
 		while (!gotValidInput) {

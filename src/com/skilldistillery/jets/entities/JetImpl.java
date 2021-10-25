@@ -2,14 +2,10 @@ package com.skilldistillery.jets.entities;
 
 import java.util.Objects;
 
-public class FighterPlane extends Jet implements CombatReady {
+public class JetImpl extends Jet	{
 
-	public FighterPlane(String type, String model, int speed, int range, long price) {
+	public JetImpl(String type, String model, int speed, int range, long price) {
 		super(type, model, speed, range, price);
-	}
-
-	public void fight() {
-		System.out.println("LOADING THE MISS-ILES!!!!");
 	}
 
 	Jet newPlane;
@@ -38,7 +34,7 @@ public class FighterPlane extends Jet implements CombatReady {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		FighterPlane other = (FighterPlane) obj;
+		JetImpl other = (JetImpl) obj;
 		return Objects.equals(newPlane, other.newPlane);
 	}
 

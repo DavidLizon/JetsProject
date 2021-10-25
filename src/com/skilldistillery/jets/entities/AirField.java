@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class AirField {
 
@@ -29,8 +30,12 @@ public class AirField {
 				} else if (type.equals("Cargo")) {
 					Jet newJet = new CargoPlane(type, model, speed, range, price);
 					jets.add(newJet);
+				} 
+				else { // ELSE MAKE BASIC PLANE
+					Jet newJet = new JetImpl(type, model, speed, range, price);
+					jets.add(newJet);
 				}
-			}
+				}
 		} catch (IOException e) {
 			System.err.println(e);
 		}
@@ -42,20 +47,11 @@ public class AirField {
 	}
 
 	public void displayJets() {
-//		int i = 1;
-//		Iterator<Jet> it = jets.iterator();
-//		while (it.hasNext()) {
-//			System.out.print(i + ": ");
-//			System.out.println(it.next());
-//			i++;
-//	}
-
 		System.out.println();
 		for (int i = 0; i < jets.size(); i++) {
 			System.out.println((i + 1) + ": " + jets.get(i).getJetInfo());
 		}
 		System.out.println();
-
 	}
 
 	public void setJet(String type, String model, int speed, int range, long price) {
@@ -66,8 +62,8 @@ public class AirField {
 			Jet newFighterPlane = new FighterPlane(type, model, speed, range, price);
 			jets.add(newFighterPlane);
 		} else {
-			Jet basicPlane = new BasicPlane(type, model, speed, range, price);
-			((BasicPlane) basicPlane).getNewPlane();
+			Jet basicPlane = new JetImpl(type, model, speed, range, price);
+			((JetImpl) basicPlane).getNewPlane();
 			jets.add(basicPlane);
 		}
 	}
@@ -79,18 +75,15 @@ public class AirField {
 	public void findFastestJet() {
 		Jet fastest = jets.get(0);
 		int fast = jets.get(0).getSpeed();
-//		int arrSize = jets.size();
 
 		if (jets.size() != 0) {
-			// Don't need to do jets.size() - 1
 			for (int i = 0; i < jets.size(); i++) {
-//				int arrInFor = jets.size();
 				if (fast < jets.get(i).getSpeed()) {
 					fast = jets.get(i).getSpeed();
 					fastest = jets.get(i);
 				}
 			}
-			System.out.println("\nThe fastest jet is:\n" + fastest.getJetInfo() + "\n");
+			System.out.println("The fastest jet is:\n" + fastest.getJetInfo() + "\n");
 		} else {
 			System.out.println("There are not jets to fly.");
 		}
@@ -106,7 +99,7 @@ public class AirField {
 					longestRange = jets.get(i);
 				}
 			}
-			System.out.println("\nThe jet with the longest range is: " + longestRange.getJetInfo() + "\n");
+			System.out.println("\nThe jet with the longest range is:\n" + longestRange.getJetInfo() + "\n");
 		} else {
 			System.out.println("There are not jets to fly.");
 		}
@@ -115,7 +108,6 @@ public class AirField {
 	public void flyAllJets() {
 		System.out.println();
 		for (Jet jet : jets) {
-//			System.out.print(jet.getJetInfo() + " Flight time: ");
 			System.out.print(jet.getJetInfo());
 			jet.fly();
 		}
@@ -130,7 +122,6 @@ public class AirField {
 				((CargoCarrier) jet).loadCargo();
 			}
 		}
-		System.out.println();
 	}
 
 	public void sendTheFighters() {
@@ -147,6 +138,23 @@ public class AirField {
 	@Override
 	public String toString() {
 		return "AirField [jets=" + jets + ", toString()=" + super.toString() + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(jets);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		AirField other = (AirField) obj;
+		return Objects.equals(jets, other.jets);
 	}
 
 }

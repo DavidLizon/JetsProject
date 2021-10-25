@@ -1,5 +1,7 @@
 package com.skilldistillery.jets.entities;
 
+import java.util.Objects;
+
 public abstract class Jet {
 
 	private String type;
@@ -30,8 +32,6 @@ public abstract class Jet {
 		return machNum;
 	}
 	
-	
-
 	public String getType() {
 		return type;
 	}
@@ -83,25 +83,23 @@ public abstract class Jet {
 		return "Jet [type=" + type + ", model=" + model + ", speed=" + speed + ", range=" + range + ", price=" + price
 				+ "]";
 	}
-	
-	
-	
-//	@Override
-//	public String toString() {
-//		return "Type: " + type + "\tModel: " + model + "\tSpeed: " + speed + "\tRange: " + range + "\tPrice: "
-//		+ price;
-//	}
 
-//// prints out formatted output
-//	@Override
-//	public String toString() {
-//		if (type.equals("Cargo")) {
-//			return "Jet Type: " + type + "\t\tModel: " + model + "\t\tSpeed: " + speed + "\tRange: " + range
-//					+ "\tPrice: " + price;
-//		} else {
-//			return "Jet Type: " + type + "\tModel: " + model + "\tSpeed: " + speed + "\tRange: " + range + "\tPrice: "
-//					+ price;
-//		}
-//	}
+	@Override
+	public int hashCode() {
+		return Objects.hash(model, price, range, speed, type);
+	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Jet other = (Jet) obj;
+		return Objects.equals(model, other.model) && price == other.price && range == other.range
+				&& speed == other.speed && Objects.equals(type, other.type);
+	}
+	
 }
