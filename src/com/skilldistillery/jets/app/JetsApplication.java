@@ -6,8 +6,6 @@ import com.skilldistillery.jets.entities.AirField;
 
 public class JetsApplication {
 
-//	IF BROKEN UNCOMMENT
-//	private AirField airField;    
 	private Scanner kb = new Scanner(System.in);
 
 	public static void main(String[] args) {
@@ -18,8 +16,7 @@ public class JetsApplication {
 	private void launch() {
 
 		AirField field = new AirField();
-		// Generates AirField and loads with aircraft from file.
-		
+		// Generates AirField and loads with aircraft from txt file.
 		System.out.println("Talk to me mother goose.\n");
 		field.getField();
 
@@ -56,9 +53,6 @@ public class JetsApplication {
 				}
 				
 			}
-			
-//			= kb.nextInt();
-//			kb.nextLine(); // Clear return char
 			continueProgram = switchStatement(userChoice, field, continueProgram);
 
 		} while (continueProgram == true);

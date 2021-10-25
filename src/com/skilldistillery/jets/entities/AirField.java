@@ -31,7 +31,7 @@ public class AirField {
 					Jet newJet = new CargoPlane(type, model, speed, range, price);
 					jets.add(newJet);
 				} 
-				else { // ELSE MAKE BASIC PLANE
+				else { 
 					Jet newJet = new JetImpl(type, model, speed, range, price);
 					jets.add(newJet);
 				}
